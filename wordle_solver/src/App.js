@@ -4,7 +4,7 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      Wordle Solver Here
+      <h1>Wordle Solver</h1>
       <InputForm/>
     </div>
   );
