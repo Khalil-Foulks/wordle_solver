@@ -19,6 +19,28 @@ function InputForm (){
         } else {
             setIncorrectLetters(e.target.value)
         }
+    };
+    // checks if a character is in the correct word and returns a boolean
+    const includesCharacters = (charactersToInclude, targetWord) => {
+        let tempNeededCharacters = charactersToInclude.split('')
+        let hasCharacters = true
+        tempNeededCharacters.forEach((character) => {
+            if(targetWord.indexOf(character) < 0) {
+                hasCharacters = false
+            }
+        })
+        return hasCharacters
+    }
+    // checks if a character is NOT in the correct word and returns a boolean
+    const doNotIncludesCharacters = (charactersToInclude, targetWord) => {
+        let tempNeededCharacters = charactersToInclude.split('')
+        let hasCharacters = true
+        tempNeededCharacters.forEach((character) => {
+            if(targetWord.indexOf(character) >= 0) {
+                hasCharacters = false
+            }
+        })
+        return hasCharacters
     }
 
     return(
