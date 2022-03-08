@@ -72,7 +72,7 @@ function InputForm (){
     const created = () => {
         setPossibleGuesses([...possibleGuesses, ...PossibleWrongWords, ...possibleAnswers])
     }
-
+    // filters out words using known and unknown letters for proposing new potential word guesses
     const filterOutWordsWithKnownAndUnknownLetters = (words) => {
         return Words.filter((value) => {
             setKnownLetters(convertToLowercase(knownLetters))
@@ -82,9 +82,54 @@ function InputForm (){
             return doNotIncludesCharacters(knownLetters, value) && doNotIncludesCharacters(incorrectLetters, value) && doNotIncludesCharacters(correctLetters, value)
         })
     }
-
+    // orders the words by a score
     const calculateGoodLetterWords = () => {
+        // remove words from the available answer words that include letters we know about
+        let wordsWithoutCharactersWeKnow = filterOutWordsWithKnownAndUnknownLetters(possibleAnswers)
 
+        // Gather a count of each character in available answer words
+        let characterMap = {}
+        wordsWithoutCharactersWeKnow.forEach((value) => {
+          value.split('').forEach((character) => {
+            characterMap[character] = (characterMap[character] | 0) + 1
+          })
+        })
+
+        // Sort the characters in order of use
+        let characterMapArray = []
+        for (const character in characterMap) {
+          characterMapArray.push({character: character, value: characterMap[character]})
+        }
+        let sortedCharacterMapArray = characterMapArray.sort((a, b) => {
+          return b.value - a.value
+        })
+        // Assign score to each character based on how many times it appears in the available word list
+        let currentScore = 26
+        let scoredCharacterMap = {}
+        for (let index in sortedCharacterMapArray) {
+          scoredCharacterMap[sortedCharacterMapArray[index].character] = currentScore
+          currentScore--
+        }
+        // Remove words from possible guess list that includes letters we know about
+        let guessesWithoutCharactersWeKnow = filterOutWordsWithKnownAndUnknownLetters(possibleGuesses)
+        // Score each available word based on its character usage.
+        let scoredWordList = guessesWithoutCharactersWeKnow.map((value) => {
+            let score = 0
+            let seenLetters = ''
+            value.split('').forEach((character) => {
+                // Don't double count scores for duplicate letters.
+                if (seenLetters.indexOf(character) < 0) {
+                    seenLetters += character
+                    score += scoredCharacterMap[character]
+                }
+            })
+            return {word: value, score: score}
+        })
+        // Order words by score and return the top 10.
+        let orderedScoredWordList = scoredWordList.sort((a, b) => {
+            return b.score - a.score
+        }).map((value) => value.word).slice(0, 10)   
+        setGoodLetterGuesses(orderedScoredWordList)     
     }
 
     const convertToLowercase = (string) => {
