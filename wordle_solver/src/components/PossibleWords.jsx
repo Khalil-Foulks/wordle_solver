@@ -1,6 +1,7 @@
 import React from "react";
 
-function PossibleWords(){
+function PossibleWords(props){
+    const { goodLetterGuesses, possibleWords } = props
     return(
         <div>
             <div>

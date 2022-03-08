@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PossibleWords from './PossibleWords';
-import possibleAnswers from './possible-answers.json'
+import possibleAnswers from '../words/possibleAnswers.json'
 
 
 function InputForm (){
@@ -70,6 +70,18 @@ function InputForm (){
         // track('result-count', possibleWords.length)
     };
 
+    const created = () => {
+
+    }
+
+    const filterOutWordsWithKnownAndUnknownLetters = () => {
+
+    }
+
+    const calculateGoodLetterWords = () => {
+
+    }
+
     // const track = (type, value) => {
     //     if(typeof umami != 'undefined') {
     //         umami.trackEvent(`${value}`, type)
@@ -112,7 +124,7 @@ function InputForm (){
                     className='incorrect-letters-input'
                 />
             </div>
-            <PossibleWords/>
+            <PossibleWords possibleWords={possibleWords} goodLetterGuesses={goodLetterGuesses}/>
         </div>
     )
 }
