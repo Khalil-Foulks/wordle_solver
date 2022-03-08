@@ -53,12 +53,10 @@ function InputForm (){
 
         let regularExpression = new RegExp(regularExpressionString)
         let processedPossibleAnswerWords = possibleAnswers.filter((value) => {
-            if(regularExpression.test(value)) {
-                const knownLettersCopy = knownLetters.slice().toLowerCase();
-                setKnownLetters(knownLettersCopy)
+            if(regularExpression.test(value)) {  
+                setKnownLetters(convertToLowercase(knownLetters))
                 if(includesCharacters(knownLetters, value)) {
-                    const incorrectLettersCopy = incorrectLetters.slice().toLowerCase()
-                    setIncorrectLetters(incorrectLettersCopy)
+                    setIncorrectLetters(convertToLowercase(incorrectLetters))
                     return incorrectLetters.length === 0 || doNotIncludesCharacters(incorrectLetters, value)
                 };
             };
@@ -75,12 +73,22 @@ function InputForm (){
         setPossibleGuesses([...possibleGuesses, ...PossibleWrongWords, ...possibleAnswers])
     }
 
-    const filterOutWordsWithKnownAndUnknownLetters = () => {
+    const filterOutWordsWithKnownAndUnknownLetters = (words) => {
+        return Words.filter((value) => {
+            setKnownLetters(convertToLowercase(knownLetters))
+            setIncorrectLetters(convertToLowercase(incorrectLetters))
+            setIncorrectLetters(convertToLowercase(correctLetters))
 
+            return doNotIncludesCharacters(knownLetters, value) && doNotIncludesCharacters(incorrectLetters, value) && doNotIncludesCharacters(correctLetters, value)
+        })
     }
 
     const calculateGoodLetterWords = () => {
 
+    }
+
+    const convertToLowercase = (string) => {
+        return string.slice().toLowerCase()
     }
 
     // const track = (type, value) => {
