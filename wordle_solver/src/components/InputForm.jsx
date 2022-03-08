@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PossibleWords from './PossibleWords';
+import possibleAnswers from './possible-answers.json'
 
 
 function InputForm (){
@@ -10,6 +11,7 @@ function InputForm (){
     const [possibleGuesses, setPossibleGuesses] = useState([]);
     const [tooManyGuesses, setTooManyGuesses] = useState(false);
     const [goodLetterGuesses, setGoodLetterGuesses] = useState([]);
+    const guessLimit = 210
 
     const onChangehandler = (e) => {
         if(e.target.name === 'correctLetters'){
@@ -42,6 +44,37 @@ function InputForm (){
         })
         return hasCharacters
     }
+    // finds possible words using known correct letters & incorrect letters
+    const processOptions = () => {
+        setTooManyGuesses(false)
+        let regularExpressionString = '^' + [...correctLetters].toLowerCase().replaceAll('?', '.');
+        regularExpressionString += '.*'
+
+        let regularExpression = new RegExp(regularExpressionString)
+        let processedPossibleAnswerWords = possibleAnswers.filter((value) => {
+            if(regularExpression.test(value)) {
+                const knownLettersCopy = knownLetters.slice().toLowerCase();
+                setKnownLetters(knownLettersCopy)
+                if(includesCharacters(knownLetters, value)) {
+                    const incorrectLettersCopy = incorrectLetters.slice().toLowerCase()
+                    setIncorrectLetters(incorrectLettersCopy)
+                    return incorrectLetters.length === 0 || doNotIncludesCharacters(incorrectLetters, value)
+                };
+            };
+            return false
+        })
+        if(processedPossibleAnswerWords.length > guessLimit) {
+            setTooManyGuesses(true)
+        };
+        setPossibleWords(processedPossibleAnswerWords.slice(0, guessLimit))
+        // track('result-count', possibleWords.length)
+    };
+
+    // const track = (type, value) => {
+    //     if(typeof umami != 'undefined') {
+    //         umami.trackEvent(`${value}`, type)
+    //     }
+    // }
 
     return(
         <div>
