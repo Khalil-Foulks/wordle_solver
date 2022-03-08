@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import PossibleWords from './PossibleWords';
-import possibleAnswers from '../words/possibleAnswers.json'
+import Words from './Words';
+import PossibleWrongWords from '../words/possibleWords.json';
+import possibleAnswers from '../words/possibleAnswers.json';
 
 
 function InputForm (){
@@ -71,7 +72,7 @@ function InputForm (){
     };
 
     const created = () => {
-
+        setPossibleGuesses([...possibleGuesses, ...PossibleWrongWords, ...possibleAnswers])
     }
 
     const filterOutWordsWithKnownAndUnknownLetters = () => {
@@ -124,7 +125,7 @@ function InputForm (){
                     className='incorrect-letters-input'
                 />
             </div>
-            <PossibleWords possibleWords={possibleWords} goodLetterGuesses={goodLetterGuesses}/>
+            <Words possibleWords={possibleWords} goodLetterGuesses={goodLetterGuesses}/>
         </div>
     )
 }

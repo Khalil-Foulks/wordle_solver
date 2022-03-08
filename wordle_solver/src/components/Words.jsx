@@ -1,6 +1,6 @@
 import React from "react";
 
-function PossibleWords(props){
+function Words(props){
     const { goodLetterGuesses, possibleWords } = props
     return(
         <div>
@@ -14,4 +14,4 @@ function PossibleWords(props){
     )
 }
 
-export default PossibleWords
+export default Words
