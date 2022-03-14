@@ -1,28 +1,43 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Words from './Words';
 import PossibleWrongWords from '../words/possibleWords.json';
-import possibleAnswers from '../words/possibleAnswers.json';
+import PossibleAnswers from '../words/possibleAnswers.json';
 
 
 function InputForm (){
-    const [correctLetters, setCorrectLetters] = useState('');
-    const [knownLetters, setKnownLetters] = useState('');
-    const [incorrectLetters, setIncorrectLetters] = useState('');
+    const [inputs, setInputs] = useState({
+        correctLetters: '',
+        knownLetters: '',
+        incorrectLetters: ''
+    })
+    const [correct, setCorrect] = useState('');
+    const [known, setKnown] = useState('');
+    const [incorrect, setIncorrect] = useState('');
     const [possibleWords, setPossibleWords] = useState([]);
-    const [possibleGuesses, setPossibleGuesses] = useState([]);
+    const [possibleGuesses, setPossibleGuesses] = useState([...PossibleWrongWords, ...PossibleAnswers]);
     const [tooManyGuesses, setTooManyGuesses] = useState(false);
     const [goodLetterGuesses, setGoodLetterGuesses] = useState([]);
     const guessLimit = 210
 
+    // const onChangehandler = (e) => {
+    //     if(e.target.name === 'correctLetters'){
+    //         setCorrectLetters(e.target.value) 
+    //     } else if (e.target.name === 'knownLetters') {
+    //         setKnownLetters(e.target.value)
+    //     } else if (e.target.name === 'incorrectLetters') {
+    //         setIncorrectLetters(e.target.value)
+    //     }
+    //     runOnLoad(() => processOptions())
+    // };
+
     const onChangehandler = (e) => {
-        if(e.target.name === 'correctLetters'){
-            setCorrectLetters(e.target.value) 
-        } else if (e.target.name === 'knownLetters') {
-            setKnownLetters(e.target.value)
-        } else {
-            setIncorrectLetters(e.target.value)
-        }
+        setInputs({
+            ...inputs,
+            [e.target.name]: e.target.value
+        })
+        runOnLoad(() => processOptions())
     };
+
     // checks if a character is in the correct word and returns a boolean
     const includesCharacters = (charactersToInclude, targetWord) => {
         let tempNeededCharacters = charactersToInclude.split('')
@@ -48,16 +63,17 @@ function InputForm (){
     // finds possible words using known correct letters & incorrect letters
     const processOptions = () => {
         setTooManyGuesses(false)
-        let regularExpressionString = '^' + [...correctLetters].toLowerCase().replaceAll('?', '.');
+        setCorrect(convertToLowercase(inputs.correctLetters).replaceAll('?', '.'))
+        let regularExpressionString = '^' + correct.slice();
         regularExpressionString += '.*'
 
         let regularExpression = new RegExp(regularExpressionString)
-        let processedPossibleAnswerWords = possibleAnswers.filter((value) => {
+        let processedPossibleAnswerWords = PossibleAnswers.filter((value) => {
             if(regularExpression.test(value)) {  
-                setKnownLetters(convertToLowercase(knownLetters))
-                if(includesCharacters(knownLetters, value)) {
-                    setIncorrectLetters(convertToLowercase(incorrectLetters))
-                    return incorrectLetters.length === 0 || doNotIncludesCharacters(incorrectLetters, value)
+                setKnown(convertToLowercase(inputs.knownLetters))
+                if(includesCharacters(known, value)) {
+                    setIncorrect(convertToLowercase(inputs.incorrectLetters))
+                    return incorrect.length === 0 || doNotIncludesCharacters(incorrect, value)
                 };
             };
             return false
@@ -66,26 +82,23 @@ function InputForm (){
             setTooManyGuesses(true)
         };
         setPossibleWords(processedPossibleAnswerWords.slice(0, guessLimit))
-        // track('result-count', possibleWords.length)
+        console.log(possibleWords)
     };
 
-    const created = () => {
-        setPossibleGuesses([...possibleGuesses, ...PossibleWrongWords, ...possibleAnswers])
-    }
     // filters out words using known and unknown letters for proposing new potential word guesses
     const filterOutWordsWithKnownAndUnknownLetters = (words) => {
-        return Words.filter((value) => {
-            setKnownLetters(convertToLowercase(knownLetters))
-            setIncorrectLetters(convertToLowercase(incorrectLetters))
-            setIncorrectLetters(convertToLowercase(correctLetters))
+        return words.filter((value) => {
+            setKnown(convertToLowercase(inputs.knownLetters))
+            setIncorrect(convertToLowercase(inputs.incorrectLetters))
+            setIncorrect(convertToLowercase(inputs.correctLetters))
 
-            return doNotIncludesCharacters(knownLetters, value) && doNotIncludesCharacters(incorrectLetters, value) && doNotIncludesCharacters(correctLetters, value)
+            return doNotIncludesCharacters(known, value) && doNotIncludesCharacters(incorrect, value) && doNotIncludesCharacters(correct, value)
         })
     }
     // orders the words by a score
     const calculateGoodLetterWords = () => {
         // remove words from the available answer words that include letters we know about
-        let wordsWithoutCharactersWeKnow = filterOutWordsWithKnownAndUnknownLetters(possibleAnswers)
+        let wordsWithoutCharactersWeKnow = filterOutWordsWithKnownAndUnknownLetters(PossibleAnswers)
 
         // Gather a count of each character in available answer words
         let characterMap = {}
@@ -136,11 +149,11 @@ function InputForm (){
         return string.slice().toLowerCase()
     }
 
-    // const track = (type, value) => {
-    //     if(typeof umami != 'undefined') {
-    //         umami.trackEvent(`${value}`, type)
-    //     }
-    // }
+    const runOnLoad = (callback) => {
+        setPossibleWords([...PossibleWrongWords, ...PossibleAnswers])
+        callback()
+        calculateGoodLetterWords()
+    }
 
     return(
         <div>
@@ -150,7 +163,7 @@ function InputForm (){
                 <input
                     type='text'
                     name='correctLetters'
-                    value={correctLetters}
+                    value={inputs.correctLetters}
                     onChange={onChangehandler}
                     placeholder='?????'
                     className='correct-letters-input'
@@ -161,7 +174,7 @@ function InputForm (){
                 <input
                     type='text'
                     name='knownLetters'
-                    value={knownLetters}
+                    value={inputs.knownLetters}
                     onChange={onChangehandler}
                     placeholder='a-z'
                     className='known-letters-input'
@@ -172,7 +185,7 @@ function InputForm (){
                 <input
                     type='text'
                     name='incorrectLetters'
-                    value={incorrectLetters}
+                    value={inputs.incorrectLetters}
                     onChange={onChangehandler}
                     placeholder='a-z'
                     className='incorrect-letters-input'
