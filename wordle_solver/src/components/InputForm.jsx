@@ -20,17 +20,6 @@ function InputForm (){
     const [isLoading, setIsLoading] = useState(false)
     const guessLimit = 210
 
-    // const onChangehandler = (e) => {
-    //     if(e.target.name === 'correctLetters'){
-    //         setCorrectLetters(e.target.value) 
-    //     } else if (e.target.name === 'knownLetters') {
-    //         setKnownLetters(e.target.value)
-    //     } else if (e.target.name === 'incorrectLetters') {
-    //         setIncorrectLetters(e.target.value)
-    //     }
-    //     runOnLoad(() => processOptions())
-    // };
-
     const onChangehandler = (e) => {
         setInputs({
             ...inputs,

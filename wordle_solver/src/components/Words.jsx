@@ -1,15 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 function Words(props){
     const { goodLetterGuesses, possibleWords, isLoading } = props
-
-    // useEffect(() => {
-
-    //     console.log(goodLetterGuesses)
-    //     console.log(possibleWords)
-    // },[])
-    // console.log(`possible answers:${possibleWords}`)
-    // console.log(`possible guesses:${goodLetterGuesses}`)
     return(
         <div>
             {
