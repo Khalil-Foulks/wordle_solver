@@ -17,6 +17,7 @@ function InputForm (){
     const [possibleGuesses, setPossibleGuesses] = useState([...PossibleWrongWords, ...PossibleAnswers]);
     const [tooManyGuesses, setTooManyGuesses] = useState(false);
     const [goodLetterGuesses, setGoodLetterGuesses] = useState([]);
+    const [isLoading, setIsLoading] = useState(false)
     const guessLimit = 210
 
     // const onChangehandler = (e) => {
@@ -150,9 +151,11 @@ function InputForm (){
     }
 
     const runOnLoad = (callback) => {
+        setIsLoading(true)
         setPossibleWords([...PossibleWrongWords, ...PossibleAnswers])
         callback()
         calculateGoodLetterWords()
+        setIsLoading(false)
     }
 
     return(
@@ -191,7 +194,7 @@ function InputForm (){
                     className='incorrect-letters-input'
                 />
             </div>
-            <Words possibleWords={possibleWords} goodLetterGuesses={goodLetterGuesses}/>
+            <Words possibleWords={possibleWords} goodLetterGuesses={goodLetterGuesses} isLoading={isLoading}/>
         </div>
     )
 }
