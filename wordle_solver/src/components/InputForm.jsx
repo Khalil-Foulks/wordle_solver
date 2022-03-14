@@ -37,6 +37,9 @@ function InputForm (){
             [e.target.name]: e.target.value
         })
         runOnLoad(() => processOptions())
+        console.log(`${e.target.name}`)
+        console.log(possibleWords)
+        console.log(goodLetterGuesses)
     };
 
     // checks if a character is in the correct word and returns a boolean
@@ -83,7 +86,7 @@ function InputForm (){
             setTooManyGuesses(true)
         };
         setPossibleWords(processedPossibleAnswerWords.slice(0, guessLimit))
-        console.log(possibleWords)
+        // console.log(possibleWords)
     };
 
     // filters out words using known and unknown letters for proposing new potential word guesses
@@ -150,11 +153,11 @@ function InputForm (){
         return string.slice().toLowerCase()
     }
 
-    const runOnLoad = (callback) => {
+    const runOnLoad = async (callback) => {
         setIsLoading(true)
         setPossibleWords([...PossibleWrongWords, ...PossibleAnswers])
         callback()
-        calculateGoodLetterWords()
+        await calculateGoodLetterWords()
         setIsLoading(false)
     }
 
