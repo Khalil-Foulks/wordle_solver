@@ -14,7 +14,7 @@ function InputForm (){
     const [known, setKnown] = useState('');
     const [incorrect, setIncorrect] = useState('');
     const [possibleWords, setPossibleWords] = useState([]);
-    const [possibleGuesses, setPossibleGuesses] = useState([...PossibleWrongWords, ...PossibleAnswers]);
+    const [suggestedGuesses, setSuggestedGuesses] = useState([...PossibleWrongWords, ...PossibleAnswers]);
     const [tooManyGuesses, setTooManyGuesses] = useState(false);
     const [goodLetterGuesses, setGoodLetterGuesses] = useState([]);
     const [isLoading, setIsLoading] = useState(false)
@@ -117,7 +117,7 @@ function InputForm (){
           currentScore--
         }
         // Remove words from possible guess list that includes letters we know about
-        let guessesWithoutCharactersWeKnow = filterOutWordsWithKnownAndUnknownLetters(possibleGuesses)
+        let guessesWithoutCharactersWeKnow = filterOutWordsWithKnownAndUnknownLetters(suggestedGuesses)
         // Score each available word based on its character usage.
         let scoredWordList = guessesWithoutCharactersWeKnow.map((value) => {
             let score = 0
