@@ -26,7 +26,7 @@ function InputForm (){
             [e.target.name]: e.target.value
         })
         if(e.target.name === 'correctLetters'){
-            setCorrect(e.target.value.toLowerCase())
+            setCorrect(e.target.value.toLowerCase().replaceAll('?', '.'))
         } else if (e.target.name === 'knownLetters'){
             setKnown(e.target.value.toLowerCase())
         } else if (e.target.name === 'incorrectLetters'){
@@ -59,7 +59,6 @@ function InputForm (){
     // finds possible words using known correct letters & incorrect letters
     const processOptions = () => {
         setTooManyGuesses(false)
-        setCorrect(convertToLowercase(inputs.correctLetters).replaceAll('?', '.'))
         let regularExpressionString = '^' + correct.slice();
         regularExpressionString += '.*'
 
@@ -67,7 +66,6 @@ function InputForm (){
         let processedPossibleAnswerWords = PossibleAnswers.filter((value) => {
             if(regularExpression.test(value)) {  
                 if(includesCharacters(known, value)) {
-                    setIncorrect(convertToLowercase(inputs.incorrectLetters))
                     return incorrect.length === 0 || doNotIncludesCharacters(incorrect, value)
                 };
             };
