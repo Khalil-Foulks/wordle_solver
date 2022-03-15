@@ -14,9 +14,9 @@ function InputForm (){
     const [known, setKnown] = useState('');
     const [incorrect, setIncorrect] = useState('');
     const [possibleWords, setPossibleWords] = useState([]);
-    const [suggestedGuesses, setSuggestedGuesses] = useState([...PossibleWrongWords, ...PossibleAnswers]);
+    const [possibleGuesses, setPossibleGuesses] = useState([...PossibleWrongWords, ...PossibleAnswers]);
     const [tooManyGuesses, setTooManyGuesses] = useState(false);
-    const [goodLetterGuesses, setGoodLetterGuesses] = useState([]);
+    const [suggestedGuesses, setSuggestedGuesses] = useState([]);
     const [isLoading, setIsLoading] = useState(false)
     const guessLimit = 210
 
@@ -28,7 +28,7 @@ function InputForm (){
         runOnLoad(() => processOptions())
         console.log(`${e.target.name}`)
         console.log(possibleWords)
-        console.log(goodLetterGuesses)
+        console.log(suggestedGuesses)
     };
 
     // checks if a character is in the correct word and returns a boolean
@@ -89,7 +89,7 @@ function InputForm (){
         })
     }
     // orders the words by a score
-    const calculateGoodLetterWords = () => {
+    const calculateSuggestedWords = () => {
         // remove words from the available answer words that include letters we know about
         let wordsWithoutCharactersWeKnow = filterOutWordsWithKnownAndUnknownLetters(PossibleAnswers)
 
@@ -117,7 +117,7 @@ function InputForm (){
           currentScore--
         }
         // Remove words from possible guess list that includes letters we know about
-        let guessesWithoutCharactersWeKnow = filterOutWordsWithKnownAndUnknownLetters(suggestedGuesses)
+        let guessesWithoutCharactersWeKnow = filterOutWordsWithKnownAndUnknownLetters(possibleGuesses)
         // Score each available word based on its character usage.
         let scoredWordList = guessesWithoutCharactersWeKnow.map((value) => {
             let score = 0
@@ -135,18 +135,18 @@ function InputForm (){
         let orderedScoredWordList = scoredWordList.sort((a, b) => {
             return b.score - a.score
         }).map((value) => value.word).slice(0, 10)   
-        setGoodLetterGuesses(orderedScoredWordList)     
+        setSuggestedGuesses(orderedScoredWordList)     
     }
 
     const convertToLowercase = (string) => {
         return string.slice().toLowerCase()
     }
 
-    const runOnLoad = async (callback) => {
+    const runOnLoad = (callback) => {
         setIsLoading(true)
         setPossibleWords([...PossibleWrongWords, ...PossibleAnswers])
         callback()
-        await calculateGoodLetterWords()
+        calculateSuggestedWords()
         setIsLoading(false)
     }
 
@@ -186,7 +186,7 @@ function InputForm (){
                     className='incorrect-letters-input'
                 />
             </div>
-            <Words possibleWords={possibleWords} goodLetterGuesses={goodLetterGuesses} isLoading={isLoading}/>
+            <Words possibleWords={possibleWords} suggestedGuesses={suggestedGuesses} isLoading={isLoading}/>
         </div>
     )
 }

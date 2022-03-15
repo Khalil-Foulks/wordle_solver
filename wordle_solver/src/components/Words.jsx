@@ -1,7 +1,7 @@
 import React from "react";
 
 function Words(props){
-    const { goodLetterGuesses, possibleWords, isLoading } = props
+    const { suggestedGuesses, possibleWords, isLoading } = props
     return(
         <div>
             {
@@ -25,7 +25,7 @@ function Words(props){
                     </div>
                     <div>
                         <h2>Suggested Guesses</h2>
-                        {goodLetterGuesses.map((guesses) => (
+                        {suggestedGuesses.map((guesses) => (
                             <div>
                                 {guesses}
                             </div>
