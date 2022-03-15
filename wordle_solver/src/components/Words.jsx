@@ -18,7 +18,7 @@ function Words(props){
                     <div>
                         <h2>Possible Answers</h2>
                         {possibleWords.map((answers) => (
-                            <div>
+                            <div key={answers}>
                                 {answers}
                             </div>
                         ))}
@@ -26,7 +26,7 @@ function Words(props){
                     <div>
                         <h2>Suggested Guesses</h2>
                         {suggestedGuesses.map((guesses) => (
-                            <div>
+                            <div key={guesses}>
                                 {guesses}
                             </div>
                         ))}

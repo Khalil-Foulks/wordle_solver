@@ -13,8 +13,8 @@ function InputForm (){
     const [correct, setCorrect] = useState('');
     const [known, setKnown] = useState('');
     const [incorrect, setIncorrect] = useState('');
-    const [possibleWords, setPossibleWords] = useState([]);
     const [possibleGuesses, setPossibleGuesses] = useState([...PossibleWrongWords, ...PossibleAnswers]);
+    const [possibleWords, setPossibleWords] = useState([]);
     const [tooManyGuesses, setTooManyGuesses] = useState(false);
     const [suggestedGuesses, setSuggestedGuesses] = useState([]);
     const [isLoading, setIsLoading] = useState(false)
@@ -25,10 +25,13 @@ function InputForm (){
             ...inputs,
             [e.target.name]: e.target.value
         })
-        runOnLoad(() => processOptions())
-        console.log(`${e.target.name}`)
-        console.log(possibleWords)
-        console.log(suggestedGuesses)
+        if(e.target.name === 'correctLetters'){
+            setCorrect(e.target.value.toLowerCase())
+        } else if (e.target.name === 'knownLetters'){
+            setKnown(e.target.value.toLowerCase())
+        } else if (e.target.name === 'incorrectLetters'){
+            setIncorrect(e.target.value.toLowerCase())
+        }
     };
 
     // checks if a character is in the correct word and returns a boolean
@@ -63,7 +66,6 @@ function InputForm (){
         let regularExpression = new RegExp(regularExpressionString)
         let processedPossibleAnswerWords = PossibleAnswers.filter((value) => {
             if(regularExpression.test(value)) {  
-                setKnown(convertToLowercase(inputs.knownLetters))
                 if(includesCharacters(known, value)) {
                     setIncorrect(convertToLowercase(inputs.incorrectLetters))
                     return incorrect.length === 0 || doNotIncludesCharacters(incorrect, value)
@@ -81,10 +83,6 @@ function InputForm (){
     // filters out words using known and unknown letters for proposing new potential word guesses
     const filterOutWordsWithKnownAndUnknownLetters = (words) => {
         return words.filter((value) => {
-            setKnown(convertToLowercase(inputs.knownLetters))
-            setIncorrect(convertToLowercase(inputs.incorrectLetters))
-            setIncorrect(convertToLowercase(inputs.correctLetters))
-
             return doNotIncludesCharacters(known, value) && doNotIncludesCharacters(incorrect, value) && doNotIncludesCharacters(correct, value)
         })
     }
@@ -144,11 +142,21 @@ function InputForm (){
 
     const runOnLoad = (callback) => {
         setIsLoading(true)
-        setPossibleWords([...PossibleWrongWords, ...PossibleAnswers])
+        setPossibleWords([])
         callback()
         calculateSuggestedWords()
         setIsLoading(false)
     }
+    // updates answers and guesses on every input change 
+    useEffect(() => {
+        if(inputs.correctLetters !== '' || inputs.knownLetters !== '' || inputs.incorrectLetters !== ''){
+            // console.log(`Useeffect:${inputs.knownLetters}`)
+            runOnLoad(() => processOptions())
+            // console.log(`input:${inputs.knownLetters} - clone:${known}`)
+            // console.log(possibleWords)
+            // console.log(suggestedGuesses)
+        }
+    }, [inputs])
 
     return(
         <div>
