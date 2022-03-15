@@ -1,7 +1,7 @@
 import React from "react";
 
 function Words(props){
-    const { suggestedGuesses, possibleWords, isLoading } = props
+    const { suggestedGuesses, possibleWords, isLoading, tooManyAnswers } = props
     return(
         <div>
             {
@@ -17,6 +17,9 @@ function Words(props){
                 <div>
                     <div>
                         <h2>Possible Answers</h2>
+                        {
+                            tooManyAnswers ? <div className="too-many-guesses">There are too many possible answers, please limit further</div> : <></> 
+                        }       
                         {possibleWords.map((answers) => (
                             <div key={answers}>
                                 {answers}

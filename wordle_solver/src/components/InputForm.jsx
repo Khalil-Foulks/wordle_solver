@@ -15,7 +15,7 @@ function InputForm (){
     const [incorrect, setIncorrect] = useState('');
     const [possibleGuesses, setPossibleGuesses] = useState([...PossibleWrongWords, ...PossibleAnswers]);
     const [possibleWords, setPossibleWords] = useState([]);
-    const [tooManyGuesses, setTooManyGuesses] = useState(false);
+    const [tooManyAnswers, setTooManyAnswers] = useState(false);
     const [suggestedGuesses, setSuggestedGuesses] = useState([]);
     const [isLoading, setIsLoading] = useState(false)
     const guessLimit = 210
@@ -58,7 +58,7 @@ function InputForm (){
     }
     // finds possible words using known correct letters & incorrect letters
     const processOptions = () => {
-        setTooManyGuesses(false)
+        setTooManyAnswers(false)
         let regularExpressionString = '^' + correct.slice();
         regularExpressionString += '.*'
 
@@ -72,7 +72,7 @@ function InputForm (){
             return false
         })
         if(processedPossibleAnswerWords.length > guessLimit) {
-            setTooManyGuesses(true)
+            setTooManyAnswers(true)
         };
         setPossibleWords(processedPossibleAnswerWords.slice(0, guessLimit))
         // console.log(possibleWords)
@@ -192,7 +192,7 @@ function InputForm (){
                     className='incorrect-letters-input'
                 />
             </div>
-            <Words possibleWords={possibleWords} suggestedGuesses={suggestedGuesses} isLoading={isLoading}/>
+            <Words possibleWords={possibleWords} suggestedGuesses={suggestedGuesses} isLoading={isLoading} tooManyAnswers={tooManyAnswers}/>
         </div>
     )
 }
