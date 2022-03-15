@@ -16,7 +16,7 @@ function InputForm (){
     const [possibleGuesses, setPossibleGuesses] = useState([...PossibleWrongWords, ...PossibleAnswers]);
     const [possibleWords, setPossibleWords] = useState([]);
     const [tooManyAnswers, setTooManyAnswers] = useState(false);
-    const [suggestedGuesses, setSuggestedGuesses] = useState([]);
+    const [suggestedGuesses, setSuggestedGuesses] = useState(['samey','audio','adieu','equal','queue','ouija']);
     const [isLoading, setIsLoading] = useState(false)
     const guessLimit = 210
 
