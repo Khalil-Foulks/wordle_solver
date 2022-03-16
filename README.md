@@ -16,7 +16,7 @@ npm install
 ```
 ### Run the app locally
 ```bash
-npm run dev
+npm start
 ```
 
 [Wordle]: https://www.nytimes.com/games/wordle/index.html
