@@ -12,7 +12,7 @@ cd wordle_solver
 ### Install dependencies
 
 ```bash
-npm install next react react-dom
+npm install
 ```
 ### Run the app locally
 ```bash
