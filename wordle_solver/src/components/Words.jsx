@@ -1,4 +1,5 @@
 import React from "react";
+import './styling/Words.css'
 
 function Words(props){
     const { suggestedGuesses, possibleWords, isLoading, tooManyAnswers } = props
@@ -8,31 +9,39 @@ function Words(props){
                 isLoading || possibleWords === [] ? 
                 <div className="">
                     <div className="answers">
+                        <hr/>
                         <h2>Possible Answers</h2>
                     </div>
                     <div className="suggested-guesses">
+                        <hr/>
                         <h2>Suggested Guesses</h2>
                     </div>
                 </div> :
                 <div>
-                    <div className="answers">
+                    <div className="container answers-containter">
+                        <hr/>
                         <h2>Possible Answers</h2>
                         {
                             tooManyAnswers ? <div className="too-many-guesses">There are too many possible answers, please limit further</div> : <></> 
-                        }       
-                        {possibleWords.map((answers, idx) => (
-                            <div key={idx} className="answers-containter">
-                                {answers}
-                            </div>
-                        ))}
+                        }
+                        <div className="answers">
+                            {possibleWords.map((answers, idx) => (
+                                <div key={idx} className="words">
+                                    {answers}
+                                </div>
+                            ))}
+                        </div>       
                     </div>
-                    <div className="suggested-guesses">
+                    <div className="container guesses-containter">
+                        <hr/>
                         <h2>Suggested Guesses</h2>
-                        {suggestedGuesses.map((guesses, idx) => (
-                            <div key={idx} className='guesses-containter'>
-                                {guesses}
-                            </div>
-                        ))}
+                        <div className="suggested-guesses">
+                            {suggestedGuesses.map((guesses, idx) => (
+                                <div key={idx} className="words">
+                                    {guesses}
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
             }
