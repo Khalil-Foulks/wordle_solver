@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Words from './Words';
 import PossibleWrongWords from '../words/possibleWords.json';
 import PossibleAnswers from '../words/possibleAnswers.json';
+import './styling/InputForm.css'
 
 
 function InputForm (){
@@ -167,7 +168,7 @@ function InputForm (){
                     value={inputs.correctLetters}
                     onChange={onChangehandler}
                     placeholder='?????'
-                    className='correct-letters-input'
+                    className='correct-letters-input border-gradient-green'
                 />
                 <br/>
                 <label>Known Letters:</label>
@@ -178,7 +179,7 @@ function InputForm (){
                     value={inputs.knownLetters}
                     onChange={onChangehandler}
                     placeholder='a-z'
-                    className='known-letters-input'
+                    className='known-letters-input border-gradient-yellow'
                 />
                 <br/>
                 <label>Incorrect Letters:</label>
@@ -189,7 +190,7 @@ function InputForm (){
                     value={inputs.incorrectLetters}
                     onChange={onChangehandler}
                     placeholder='a-z'
-                    className='incorrect-letters-input'
+                    className='incorrect-letters-input border-gradient-red'
                 />
             </div>
             <Words possibleWords={possibleWords} suggestedGuesses={suggestedGuesses} isLoading={isLoading} tooManyAnswers={tooManyAnswers}/>

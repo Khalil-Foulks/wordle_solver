@@ -1,0 +1,66 @@
+.form-container {
+    margin-bottom: 32px;
+}
+
+input {
+    border: 10px solid;
+    border-image-slice: 1;
+    border-width: 5px;
+    border-radius: 1em;
+}
+
+label {
+    font-size: 20px;
+    color: #fff;
+}
+
+.correct-letters-input {
+    padding: 14px 32px 14px 16px;
+    outline: none;
+    width: 320px;
+    background: transparent;
+    color: #538d4e;
+}
+
+.known-letters-input {
+    padding: 14px 32px 14px 16px;
+    outline: none;
+    width: 320px;
+    background: transparent;
+    color: #b59f3b;
+}
+
+.incorrect-letters-input {
+    padding: 14px 32px 14px 16px;
+    outline: none;
+    width: 320px;
+    background: transparent;
+    color: #fff;
+}
+
+.correct-letters-input::placeholder {
+    color: #538d4e;
+    font-size: 25px;
+}
+
+.known-letters-input::placeholder {
+    color: #b59f3b;
+    font-size: 25px;
+}
+
+.incorrect-letters-input::placeholder {
+    color: #cc1a50;
+    font-size: 25px;
+}
+
+.border-gradient-yellow {
+    border-image-source: linear-gradient(to left, #b59f3b, #caec0a);
+}
+
+.border-gradient-green {
+    border-image-source: linear-gradient(to left, #5ca706, #00C853);
+}
+
+.border-gradient-red {
+    border-image-source: linear-gradient(to left, #a74106, #cc1a50);
+}
