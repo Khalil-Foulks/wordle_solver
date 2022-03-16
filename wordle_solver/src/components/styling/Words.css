@@ -1,0 +1,35 @@
+h2 {
+    margin: 5px;
+}
+
+.container {
+    color: azure;
+    max-height: 10%;
+}
+
+.too-many-guesses {
+    color: #cc1a50;
+}
+
+.answers {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    color: azure;
+}
+
+.suggested-guesses {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    color: azure;
+}
+
+.words{
+    margin: 5px;
+    font-size: 25px;
+    width: 25%;
+}
+
