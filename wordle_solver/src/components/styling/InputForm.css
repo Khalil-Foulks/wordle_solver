@@ -7,6 +7,11 @@ input {
     border-image-slice: 1;
     border-width: 5px;
     border-radius: 1em;
+    margin: 10px 0;
+}
+
+input[type="text"] {
+    font-size: 1.5rem;
 }
 
 label {
@@ -17,7 +22,7 @@ label {
 .correct-letters-input {
     padding: 14px 32px 14px 16px;
     outline: none;
-    width: 320px;
+    width: 20rem;
     background: transparent;
     color: #538d4e;
 }
