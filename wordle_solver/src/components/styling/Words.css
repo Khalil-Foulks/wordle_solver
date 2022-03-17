@@ -1,5 +1,5 @@
 h2 {
-    margin: 5px;
+    margin: .313rem;
 }
 
 .container {
@@ -9,6 +9,7 @@ h2 {
 
 .too-many-guesses {
     color: #cc1a50;
+    font-weight: bold;
 }
 
 .answers {
@@ -28,8 +29,24 @@ h2 {
 }
 
 .words{
-    margin: 5px;
-    font-size: 25px;
+    margin: .313rem;
+    font-size: 1.5rem;
     width: 25%;
+}
+
+/* Tablet */
+@media (max-width: 800px){
+    h1 {
+        font-size: 2rem; 
+    }
+    h2 {
+        font-size: 1.2rem; 
+    }
+    .words{
+        font-size: 1.2rem; 
+    }
+    .too-many-guesses {
+        font-size: .8rem;
+    }
 }
 

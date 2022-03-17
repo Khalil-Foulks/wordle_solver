@@ -92,17 +92,29 @@ body {
   width: 50%;
   min-height: 32.5rem;
   text-align: center;
-  margin: 128px auto;
-  border-radius: 10px;
-  padding-bottom: 32px;
+  margin: 8rem auto;
+  border-radius: .625rem;
+  padding-bottom: 2rem;
 }
 
 h1 {
-  margin: 32px 0;
+  margin: 2rem 0;
   color:#fff;
-  font-size: 24px;
+  font-size: 1.5rem;
 }
 
 hr {
   color: rgba(126, 242, 157);
+}
+
+/* Tablet */
+@media (max-width: 800px){
+  h1 {
+      font-size: 1.4rem; 
+  }
+
+  .App {
+    width: 60%;
+    margin: 4rem auto;
+  }
 }

@@ -3,11 +3,10 @@
 }
 
 input {
-    border: 10px solid;
+    border: .625rem solid;
     border-image-slice: 1;
-    border-width: 5px;
-    border-radius: 1em;
-    margin: 10px 0;
+    border-width: .313rem;
+    margin: .625rem 0;
 }
 
 input[type="text"] {
@@ -16,14 +15,14 @@ input[type="text"] {
 }
 
 label {
-    font-size: 20px;
+    font-size: 1.25rem;
     color: #fff;
 }
 
 .correct-letters-input {
     padding: 14px 32px 14px 16px;
     outline: none;
-    width: 20rem;
+    width: 40%;
     background: transparent;
     color: #538d4e;
 }
@@ -31,7 +30,7 @@ label {
 .known-letters-input {
     padding: 14px 32px 14px 16px;
     outline: none;
-    width: 320px;
+    width: 40%;
     background: transparent;
     color: #b59f3b;
 }
@@ -39,7 +38,7 @@ label {
 .incorrect-letters-input {
     padding: 14px 32px 14px 16px;
     outline: none;
-    width: 320px;
+    width: 40%;
     background: transparent;
     color: #cc1a50;
 }
@@ -69,4 +68,38 @@ label {
 
 .border-gradient-red {
     border-image-source: linear-gradient(to left, #a74106, #cc1a50);
+}
+
+@media (max-width: 800px){
+    input[type="text"] {
+        font-size: 1.25rem;
+    }
+    
+    label {
+        font-size: 1rem;
+    }
+
+    .correct-letters-input {
+        width: 60%;
+    }
+    
+    .known-letters-input {
+        width: 60%;
+    }
+    
+    .incorrect-letters-input {
+        width: 60%;
+    }
+
+    .correct-letters-input::placeholder {
+        font-size: 1.5rem
+    }
+    
+    .known-letters-input::placeholder {
+        font-size: 1.5rem
+    }
+    
+    .incorrect-letters-input::placeholder {
+        font-size: 1.5rem
+    }
 }
