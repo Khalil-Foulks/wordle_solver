@@ -88,8 +88,8 @@ body {
   background: #161a2b;
   display: flex;
   flex-direction: column;
-  justify-content: start;
-  width: 32.5rem;
+  justify-content: flex-start;
+  width: 50%;
   min-height: 32.5rem;
   text-align: center;
   margin: 128px auto;
@@ -101,4 +101,8 @@ h1 {
   margin: 32px 0;
   color:#fff;
   font-size: 24px;
+}
+
+hr {
+  color: rgba(126, 242, 157);
 }
