@@ -104,3 +104,38 @@ label {
         font-size: 1.5rem
     }
 }
+
+/* Phone */
+@media (max-width: 400px){
+    input[type="text"] {
+        font-size: 1.25rem;
+    }
+    
+    label {
+        font-size: .9rem;
+    }
+
+    .correct-letters-input {
+        width: 75%;
+    }
+    
+    .known-letters-input {
+        width: 75%;
+    }
+    
+    .incorrect-letters-input {
+        width: 75%;
+    }
+
+    .correct-letters-input::placeholder {
+        font-size: 1.2rem
+    }
+    
+    .known-letters-input::placeholder {
+        font-size: 1.2rem
+    }
+    
+    .incorrect-letters-input::placeholder {
+        font-size: 1.2rem
+    }
+}
