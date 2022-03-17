@@ -105,7 +105,7 @@ label {
     }
 }
 
-/* Phone */
+/* Phone 2*/
 @media (max-width: 400px){
     input[type="text"] {
         font-size: 1.25rem;

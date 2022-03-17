@@ -10,6 +10,7 @@ h2 {
 .too-many-guesses {
     color: #cc1a50;
     font-weight: bold;
+    margin: .6rem 0rem;
 }
 
 .answers {
@@ -36,9 +37,6 @@ h2 {
 
 /* Tablet */
 @media (max-width: 800px){
-    h1 {
-        font-size: 2rem; 
-    }
     h2 {
         font-size: 1.2rem; 
     }
@@ -47,6 +45,16 @@ h2 {
     }
     .too-many-guesses {
         font-size: .8rem;
+    }
+}
+
+/* Phone 2 */
+@media (max-width: 400px){
+    h2 {
+        font-size: 1rem; 
+    }
+    .too-many-guesses {
+        font-size: .7rem;
     }
 }
 
