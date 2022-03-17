@@ -118,3 +118,16 @@ hr {
     margin: 4rem auto;
   }
 }
+
+/* Phone */
+@media (max-width: 500px){
+  h1 {
+      font-size: 1.4rem; 
+      margin: 1rem 0;
+  }
+
+  .App {
+    width: 90%;
+    margin: 2rem auto;
+  }
+}

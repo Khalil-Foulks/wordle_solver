@@ -70,6 +70,7 @@ label {
     border-image-source: linear-gradient(to left, #a74106, #cc1a50);
 }
 
+/* Tablet */
 @media (max-width: 800px){
     input[type="text"] {
         font-size: 1.25rem;
