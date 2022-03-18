@@ -20,42 +20,42 @@ label {
 }
 
 .correct-letters-input {
-    padding: 14px 32px 14px 16px;
+    padding: .875rem 2rem .875rem 1rem;
     outline: none;
-    width: 40%;
+    width: 35%;
     background: transparent;
     color: #538d4e;
 }
 
 .known-letters-input {
-    padding: 14px 32px 14px 16px;
+    padding: .875rem 2rem .875rem 1rem;
     outline: none;
-    width: 40%;
+    width: 35%;
     background: transparent;
     color: #b59f3b;
 }
 
 .incorrect-letters-input {
-    padding: 14px 32px 14px 16px;
+    padding: .875rem 2rem .875rem 1rem;
     outline: none;
-    width: 40%;
+    width: 35%;
     background: transparent;
     color: #cc1a50;
 }
 
 .correct-letters-input::placeholder {
     color: #538d4e;
-    font-size: 25px;
+    font-size: 1.563rem;
 }
 
 .known-letters-input::placeholder {
     color: #b59f3b;
-    font-size: 25px;
+    font-size: 1.563rem;
 }
 
 .incorrect-letters-input::placeholder {
     color: #cc1a50;
-    font-size: 25px;
+    font-size: 1.563rem;
 }
 
 .border-gradient-yellow {
