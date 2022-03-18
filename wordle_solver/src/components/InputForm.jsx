@@ -169,6 +169,7 @@ function InputForm (){
                     onChange={onChangehandler}
                     placeholder='?????'
                     className='correct-letters-input border-gradient-green'
+                    maxLength={5}
                 />
                 <br/>
                 <label>Known Letters:</label>
@@ -191,6 +192,7 @@ function InputForm (){
                     onChange={onChangehandler}
                     placeholder='a-z'
                     className='incorrect-letters-input border-gradient-red'
+                    autoFocus
                 />
             </div>
             <Words possibleWords={possibleWords} suggestedGuesses={suggestedGuesses} isLoading={isLoading} tooManyAnswers={tooManyAnswers}/>
