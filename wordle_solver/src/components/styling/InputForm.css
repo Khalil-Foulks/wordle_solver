@@ -71,7 +71,7 @@ label {
 }
 
 /* Tablet */
-@media (max-width: 800px){
+@media (max-width: 820px){
     input[type="text"] {
         font-size: 1.25rem;
     }
